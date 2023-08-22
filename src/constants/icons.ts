@@ -1,8 +1,9 @@
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
-import { BsFillPlayFill } from "react-icons/bs";
+import { BsFillPlayFill, BsFillPauseFill } from "react-icons/bs";
 
 export const Icons = {
     PLAY: BsFillPlayFill,
+    PAUSE: BsFillPauseFill,
     PREVIOUS: GrFormPrevious,
     NEXT: GrFormNext,
 };
