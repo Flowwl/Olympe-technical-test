@@ -2,6 +2,7 @@ import * as React from 'react';
 import { FC } from 'react';
 import cx from "classnames";
 import { usePlaylistContext } from "../contexts";
+import { AudioPlayer } from '../../../components/molecules';
 
 interface PlaylistPlayerProps {
     className?: string;
@@ -22,6 +23,7 @@ const PlaylistPlayer: FC<PlaylistPlayerProps> = ({ className }) => {
                     <p>{selectedSong.artist}</p>
                 </div>
             </div>
+            <AudioPlayer/>
         </div>
     );
 };
