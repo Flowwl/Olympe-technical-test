@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export const useAudioAnalyzer = (audio: HTMLAudioElement) => {
+export const useAudioAnalyzer = (audio: HTMLAudioElement | null) => {
     const [analyzerData, setAnalyzerData] = useState({});
 
     const audioAnalyzer = () => {
@@ -10,17 +10,19 @@ export const useAudioAnalyzer = (audio: HTMLAudioElement) => {
 
         const bufferLength = analyzer.frequencyBinCount;
         const dataArray = new Uint8Array(bufferLength);
-        const source = audioCtx.createMediaElementSource(audio);
+        if (audio) {
+            const source = audioCtx.createMediaElementSource(audio);
 
-        source.connect(analyzer);
-        source.connect(audioCtx.destination);
-        // @ts-expect-error it exists
-        source.onended = () => {
-            source.disconnect();
-        };
+            source.connect(analyzer);
+            source.connect(audioCtx.destination);
+            // @ts-expect-error it exists
+            source.onended = () => {
+                source.disconnect();
+            };
 
-        // set the analyzerData state with the analyzer, bufferLength, and dataArray
-        setAnalyzerData({ analyzer, bufferLength, dataArray });
+            // set the analyzerData state with the analyzer, bufferLength, and dataArray
+            setAnalyzerData({ analyzer, bufferLength, dataArray });
+        }
     };
 
     useEffect(() => {

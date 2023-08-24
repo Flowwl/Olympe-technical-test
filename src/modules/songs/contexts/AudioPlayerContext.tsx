@@ -1,11 +1,12 @@
 import React, { FC, ReactNode, useEffect, useRef, useState } from "react";
 import { createCtx } from "../../../utils";
 import { usePlaylistContext } from "./PlaylistContext";
+import { useAudioAnalyzer } from "../../../hooks";
 
 interface Props {
     children: ReactNode;
 }
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const AudioPlayerContextProvider: FC<Props> = ({ children }) => {
     const { selectedSong, selectNextSong } = usePlaylistContext();
 
@@ -16,8 +17,11 @@ const AudioPlayerContextProvider: FC<Props> = ({ children }) => {
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
 
+    const { analyzerData } = useAudioAnalyzer(audioRef.current)
+
     const updateCurrentTime = () => setCurrentTime(Math.floor(audioRef.current?.currentTime || 0))
     const updateDuration = () => setDuration(Math.floor(audioRef.current?.duration || 0))
+
 
     const pause = () => setIsPlaying(false);
     const play = () => setIsPlaying(true);
@@ -64,7 +68,8 @@ const AudioPlayerContextProvider: FC<Props> = ({ children }) => {
             changeCurrentTime,
             songCurrentTime: currentTime,
             songDuration: duration,
-            isPlaying
+            isPlaying,
+            analyzerData
         }}>
             <audio
                 ref={audioRef}
@@ -89,6 +94,7 @@ export interface AudioPlayerContext {
 
     songDuration: number;
     songCurrentTime: number;
+    analyzerData: any;
 }
 
 export const [useAudioPlayerContext, AudioPlayerContextBaseProvider] = createCtx<AudioPlayerContext>();
