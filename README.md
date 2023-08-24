@@ -1,6 +1,5 @@
 # TODO
 
-- Responsive
 - Design
 - Background music
 

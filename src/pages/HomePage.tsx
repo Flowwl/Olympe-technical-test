@@ -9,7 +9,7 @@ const HomePage: FC = () => {
     return (
         <PlaylistContextProvider>
             <div className="flex h-full">
-                <Library/>
+                <Library className="w-72 laptop:w-96"/>
                 <PlaylistPlayer className="w-full"/>
             </div>
         </PlaylistContextProvider>
