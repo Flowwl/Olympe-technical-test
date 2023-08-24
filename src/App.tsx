@@ -4,7 +4,7 @@ import HomePage from "./pages/HomePage";
 
 function App() {
     return (
-        <div className="App h-screen">
+        <div className="App h-screen" data-testid="app">
             <HomePage/>
         </div>
     );

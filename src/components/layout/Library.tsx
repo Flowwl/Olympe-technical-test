@@ -11,8 +11,8 @@ interface LibraryProps {
 const Library: FC<LibraryProps> = ({ className }) => {
     const { playlist } = usePlaylistContext();
     return (
-        <div className={cx("w-72 overflow-y-auto shadow-library", className)} data-testid="library">
-            <h2 className="font-bold text-left ml-2">Library</h2>
+        <div className={cx("overflow-y-auto shadow-library", className)} data-testid="library">
+            <h2 className="font-bold text-left ml-4 mt-4 text-base tablet:text-xl">Library</h2>
             <div className="flex flex-col mt-5 gap-1">
                 {playlist.map((song) => <LibrarySongButton key={song.id} song={song}/>)}
             </div>
